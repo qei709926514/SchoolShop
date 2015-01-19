@@ -7,6 +7,8 @@
 //
 
 #import "FirstViewController.h"
+#import <BmobSDK/Bmob.h>
+#import "SSInfoModel.h"
 
 @interface FirstViewController ()
 
@@ -17,6 +19,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    BmobQuery *que = [BmobQuery queryWithClassName:@"mainInfo"];
+    
+    [que findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+        for (BmobObject *obj in array) {
+            SSInfoModel *info = [SSInfoModel infoWithkDate:obj];
+        }
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

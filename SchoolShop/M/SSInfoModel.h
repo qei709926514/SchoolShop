@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class BmobObject;
 
 
 
@@ -17,11 +18,14 @@
 @property (nonatomic,copy) NSString* info;
 @property (nonatomic,retain) NSMutableArray* image;
 @property (nonatomic,copy) NSString* mainimage;
-@property (nonatomic,assign) NSNumber* attrntion;
+@property (nonatomic,assign) NSNumber* attention;
 @property (nonatomic,assign) NSNumber* price;
 @property (nonatomic,assign) BOOL isCP;
 @property (nonatomic,assign) BOOL isW;
-@property (nonatomic,copy) NSString* class;
-@property (nonatomic,retain) NSData* createAt;
+@property (nonatomic,copy) NSString* Kclass;
+@property (nonatomic,retain) NSDate* createdAt;
+
+- (instancetype)initWithDate:(BmobObject *)data;
++ (instancetype)infoWithkDate:(BmobObject *)data;
 
 @end

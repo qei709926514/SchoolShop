@@ -15,8 +15,8 @@
 		B0993A6C1A694D00009B9E12 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0993A6B1A694D00009B9E12 /* Images.xcassets */; };
 		B0993A6F1A694D00009B9E12 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = B0993A6D1A694D00009B9E12 /* LaunchScreen.xib */; };
 		B0993A7B1A694D00009B9E12 /* SchoolShopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B0993A7A1A694D00009B9E12 /* SchoolShopTests.m */; };
-		B0993A971A69560C009B9E12 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0993A941A69560C009B9E12 /* FirstViewController.m */; };
 		B0993A981A69560C009B9E12 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0993A961A69560C009B9E12 /* SecondViewController.m */; };
+		B0A3724F1A6CD57000178B2E /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B0993A941A69560C009B9E12 /* FirstViewController.m */; };
 		B0CBD7861A6AA95C00C5CE32 /* SSInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CBD7851A6AA95C00C5CE32 /* SSInfoModel.m */; };
 		F2DDF21241FAFB070DAB871C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337DFC3981F5B7A298402F98 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -371,8 +371,8 @@
 			files = (
 				B0CBD7861A6AA95C00C5CE32 /* SSInfoModel.m in Sources */,
 				B0993A981A69560C009B9E12 /* SecondViewController.m in Sources */,
+				B0A3724F1A6CD57000178B2E /* FirstViewController.m in Sources */,
 				B0993A611A694D00009B9E12 /* AppDelegate.m in Sources */,
-				B0993A971A69560C009B9E12 /* FirstViewController.m in Sources */,
 				B0993A5E1A694D00009B9E12 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
