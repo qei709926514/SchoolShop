@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B025CA6A1A6CC8EB00D9C452 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B025CA691A6CC8EB00D9C452 /* libz.1.2.5.dylib */; };
 		B025CA6C1A6CC8FC00D9C452 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B025CA6B1A6CC8FC00D9C452 /* libicucore.dylib */; };
+		B073AD3E1A6D00670057F6C1 /* SSWebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B073AD3D1A6D00670057F6C1 /* SSWebManager.m */; };
 		B0993A5E1A694D00009B9E12 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B0993A5D1A694D00009B9E12 /* main.m */; };
 		B0993A611A694D00009B9E12 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B0993A601A694D00009B9E12 /* AppDelegate.m */; };
 		B0993A6A1A694D00009B9E12 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0993A681A694D00009B9E12 /* Main.storyboard */; };
@@ -37,6 +38,8 @@
 		40E530A268B51ABE85A4655D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B025CA691A6CC8EB00D9C452 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		B025CA6B1A6CC8FC00D9C452 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		B073AD3C1A6D00670057F6C1 /* SSWebManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSWebManager.h; sourceTree = "<group>"; };
+		B073AD3D1A6D00670057F6C1 /* SSWebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSWebManager.m; sourceTree = "<group>"; };
 		B0993A581A694D00009B9E12 /* SchoolShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SchoolShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0993A5C1A694D00009B9E12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B0993A5D1A694D00009B9E12 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 		B0993A911A69559D009B9E12 /* Web */ = {
 			isa = PBXGroup;
 			children = (
+				B073AD3C1A6D00670057F6C1 /* SSWebManager.h */,
+				B073AD3D1A6D00670057F6C1 /* SSWebManager.m */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -369,6 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B073AD3E1A6D00670057F6C1 /* SSWebManager.m in Sources */,
 				B0CBD7861A6AA95C00C5CE32 /* SSInfoModel.m in Sources */,
 				B0993A981A69560C009B9E12 /* SecondViewController.m in Sources */,
 				B0A3724F1A6CD57000178B2E /* FirstViewController.m in Sources */,

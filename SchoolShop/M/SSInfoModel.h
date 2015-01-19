@@ -25,7 +25,9 @@
 @property (nonatomic,copy) NSString* Kclass;
 @property (nonatomic,retain) NSDate* createdAt;
 
-- (instancetype)initWithDate:(BmobObject *)data;
-+ (instancetype)infoWithkDate:(BmobObject *)data;
+- (instancetype)initWithDate:(NSDictionary *)data;
++ (instancetype)infoWithkDate:(NSDictionary *)data;
+
+
 
 @end

@@ -9,6 +9,7 @@
 #import "FirstViewController.h"
 #import <BmobSDK/Bmob.h>
 #import "SSInfoModel.h"
+#import "SSWebManager.h"
 
 @interface FirstViewController ()
 
@@ -19,15 +20,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
     BmobQuery *que = [BmobQuery queryWithClassName:@"mainInfo"];
     
     [que findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
         for (BmobObject *obj in array) {
-            SSInfoModel *info = [SSInfoModel infoWithkDate:obj];
+            SSWebManager *webManager = [SSWebManager shareHttpManage];
+            [webManager accessGetDicObject:obj];
         }
         
     }];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didaccessGetDic:) name:@"dic" object:nil];
+    
+}
+
+- (void)didaccessGetDic:(NSNotification *)noti
+{
+    NSDictionary *dic = noti.object;
+    SSInfoModel *model = [SSInfoModel infoWithkDate:dic];
+     NSLog(@"%@",model);
+
+   
 }
 
 - (void)didReceiveMemoryWarning {

@@ -24,26 +24,16 @@
 @synthesize createdAt = _createdAt;
 
 
-- (instancetype)initWithDate:(BmobObject *)data
+- (instancetype)initWithDate:(NSDictionary *)data
 {
     if (self = [super init]) {
-        self.objectid = data.objectId;
-        self.tiltle = [data objectForKey:@"tiltle"];
-        self.info = [data objectForKey:@"info"];
-        BmobFile *flie = [data objectForKey:@"mainImage"];
-        self.mainimage = flie.url;
-        self.attention = [data objectForKey:@"attention"];
-        self.price = [data objectForKey:@"price"];
-        self.isCP = [data objectForKey:@"isCP"];
-        self.isW = [data objectForKey:@"isW"];
-        self.Kclass = [data objectForKey:@"class"];
-        
-        self.createdAt = data.createdAt;
+    
+        [self setValuesForKeysWithDictionary:data];
     }
     return self;
 }
 
-+ (instancetype)infoWithkDate:(BmobObject *)data
++ (instancetype)infoWithkDate:(NSDictionary *)data
 {
     SSInfoModel *info = [[SSInfoModel alloc]initWithDate:data];
     return info;
