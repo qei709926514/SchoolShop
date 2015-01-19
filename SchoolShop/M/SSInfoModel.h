@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 @interface SSInfoModel : NSObject
 
 @property (nonatomic,copy) NSString* objectid;
