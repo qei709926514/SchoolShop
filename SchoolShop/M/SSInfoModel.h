@@ -20,8 +20,8 @@
 @property (nonatomic,copy) NSString* mainimage;
 @property (nonatomic,assign) NSNumber* attention;
 @property (nonatomic,assign) NSNumber* price;
-@property (nonatomic,assign) BOOL isCP;
-@property (nonatomic,assign) BOOL isW;
+@property (nonatomic,assign) NSNumber* isCP;
+@property (nonatomic,assign) NSNumber* isW;
 @property (nonatomic,copy) NSString* Kclass;
 @property (nonatomic,retain) NSDate* createdAt;
 

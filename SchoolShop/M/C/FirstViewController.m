@@ -10,8 +10,10 @@
 #import <BmobSDK/Bmob.h>
 #import "SSInfoModel.h"
 #import "SSWebManager.h"
+#import "JKImagePickerController.h"
 
-@interface FirstViewController ()
+@interface FirstViewController ()<JKImagePickerControllerDelegate>
+
 
 @end
 
@@ -35,6 +37,56 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didaccessGetDic:) name:@"dic" object:nil];
     
 }
+- (IBAction)pickImage:(UIButton *)sender {
+    
+    JKImagePickerController *imagePickerController = [[JKImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.showsCancelButton = YES;
+    imagePickerController.allowsMultipleSelection = YES;
+    imagePickerController.minimumNumberOfSelection = 1;
+    imagePickerController.maximumNumberOfSelection = 9;
+//    imagePickerController.selectedAssetArray = self.assetsArray;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
+    [self presentViewController:navigationController animated:YES completion:NULL];
+
+}
+
+
+- (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAsset:(JKAssets *)asset isSource:(BOOL)source
+{
+    [imagePicker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+- (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAssets:(NSArray *)assets isSource:(BOOL)source
+{
+    
+    
+        
+        [imagePicker dismissViewControllerAnimated:YES completion:^{
+            
+            [self uploadImage:assets];
+            
+        }];
+    
+    
+}
+- (void)imagePickerControllerDidCancel:(JKImagePickerController *)imagePicker
+{
+    [imagePicker dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+
+- (void)uploadImage:(NSArray *)arr
+{
+    SSWebManager *webManager = [SSWebManager shareHttpManage];
+    [webManager accessUploadImage:arr];
+}
+
+
+
 
 - (void)didaccessGetDic:(NSNotification *)noti
 {

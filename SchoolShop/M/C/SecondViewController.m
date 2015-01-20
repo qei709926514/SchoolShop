@@ -8,7 +8,7 @@
 
 #import "SecondViewController.h"
 
-@interface SecondViewController ()
+@interface SecondViewController ()<UIImagePickerControllerDelegate>
 
 @end
 
@@ -17,6 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+//    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        UIImagePickerController *picker = [[UIImagePickerController alloc]init];
+//        picker.delegate = self;
+//        picker.allowsEditing = YES;
+//        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        self pres
+//    }
+    
     
 }
 

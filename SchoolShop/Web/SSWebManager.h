@@ -15,4 +15,6 @@
 
 - (void)accessGetDicObject:(BmobObject *)object;
 
+- (void)accessUploadImage:(NSArray *)arr;
+
 @end
