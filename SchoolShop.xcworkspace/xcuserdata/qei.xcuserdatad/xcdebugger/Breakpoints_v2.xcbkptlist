@@ -9,29 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SchoolShop/Web/SSWebManager.m"
-            timestampString = "443428296.399774"
+            filePath = "SchoolShop/M/C/FirstViewController.m"
+            timestampString = "443440911.676048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "-accessUploadImage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SchoolShop/Web/SSWebManager.m"
-            timestampString = "443428299.649348"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "-accessUploadImage:"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-didaccessGetList:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

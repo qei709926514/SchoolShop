@@ -17,13 +17,13 @@
 @property (nonatomic,copy) NSString* tiltle;
 @property (nonatomic,copy) NSString* info;
 @property (nonatomic,retain) NSMutableArray* image;
-@property (nonatomic,copy) NSString* mainimage;
 @property (nonatomic,assign) NSNumber* attention;
 @property (nonatomic,assign) NSNumber* price;
 @property (nonatomic,assign) NSNumber* isCP;
 @property (nonatomic,assign) NSNumber* isW;
 @property (nonatomic,copy) NSString* Kclass;
 @property (nonatomic,retain) NSDate* createdAt;
+@property (nonatomic,copy) NSString* FBZid;
 
 - (instancetype)initWithDate:(NSDictionary *)data;
 + (instancetype)infoWithkDate:(NSDictionary *)data;

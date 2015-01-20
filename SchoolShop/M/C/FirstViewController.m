@@ -7,13 +7,14 @@
 //
 
 #import "FirstViewController.h"
-#import <BmobSDK/Bmob.h>
 #import "SSInfoModel.h"
 #import "SSWebManager.h"
 #import "JKImagePickerController.h"
+#import "SShelp.h"
 
 @interface FirstViewController ()<JKImagePickerControllerDelegate>
 
+@property (nonatomic,retain) SSInfoModel *upmodel;
 
 @end
 
@@ -24,17 +25,11 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     
-    BmobQuery *que = [BmobQuery queryWithClassName:@"mainInfo"];
     
-    [que findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        for (BmobObject *obj in array) {
-            SSWebManager *webManager = [SSWebManager shareHttpManage];
-            [webManager accessGetDicObject:obj];
-        }
-        
-    }];
+        SSWebManager *webManager = [SSWebManager shareHttpManage];
+            [webManager accessGetList:1];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didaccessGetDic:) name:@"dic" object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didaccessGetList:) name:@"List" object:nil];
     
 }
 - (IBAction)pickImage:(UIButton *)sender {
@@ -44,8 +39,7 @@
     imagePickerController.showsCancelButton = YES;
     imagePickerController.allowsMultipleSelection = YES;
     imagePickerController.minimumNumberOfSelection = 1;
-    imagePickerController.maximumNumberOfSelection = 9;
-//    imagePickerController.selectedAssetArray = self.assetsArray;
+    imagePickerController.maximumNumberOfSelection = 5;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
     [self presentViewController:navigationController animated:YES completion:NULL];
 
@@ -65,8 +59,8 @@
         
         [imagePicker dismissViewControllerAnimated:YES completion:^{
             
-            [self uploadImage:assets];
-            
+            [SShelp saveImage:assets];
+            [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didSaveImage:) name:@"saveI" object:nil];
         }];
     
     
@@ -79,22 +73,22 @@
 }
 
 
-- (void)uploadImage:(NSArray *)arr
+- (void)didaccessGetList:(NSNotification *)noti
 {
-    SSWebManager *webManager = [SSWebManager shareHttpManage];
-    [webManager accessUploadImage:arr];
-}
-
-
-
-
-- (void)didaccessGetDic:(NSNotification *)noti
-{
-    NSDictionary *dic = noti.object;
-    SSInfoModel *model = [SSInfoModel infoWithkDate:dic];
-     NSLog(@"%@",model);
+    NSArray *dataArr = noti.object;
+    
+//     NSLog(@"%@",model);
+//    self.upmodel = model;
 
    
+}
+
+- (void)didSaveImage:(NSNotification *)noti
+{
+    
+    NSMutableArray *pathArr = noti.object;
+    self.upmodel.image = pathArr;
+    [[SSWebManager shareHttpManage]accessSaveinfo:self.upmodel];
 }
 
 - (void)didReceiveMemoryWarning {

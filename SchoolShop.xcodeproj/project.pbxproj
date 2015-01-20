@@ -34,6 +34,7 @@
 		B0B3EAF71A6E16A300E9109C /* PhotoAlbumManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3EAE71A6E16A300E9109C /* PhotoAlbumManager.m */; };
 		B0B3EAF81A6E16A300E9109C /* UIView+JKPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3EAE91A6E16A300E9109C /* UIView+JKPicker.m */; };
 		B0B3EAFA1A6E256C00E9109C /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0B3EAF91A6E256C00E9109C /* AssetsLibrary.framework */; };
+		B0B3EAFD1A6E341700E9109C /* SShelp.m in Sources */ = {isa = PBXBuildFile; fileRef = B0B3EAFC1A6E341700E9109C /* SShelp.m */; };
 		B0CBD7861A6AA95C00C5CE32 /* SSInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B0CBD7851A6AA95C00C5CE32 /* SSInfoModel.m */; };
 		F2DDF21241FAFB070DAB871C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 337DFC3981F5B7A298402F98 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -101,6 +102,8 @@
 		B0B3EAE81A6E16A300E9109C /* UIView+JKPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+JKPicker.h"; sourceTree = "<group>"; };
 		B0B3EAE91A6E16A300E9109C /* UIView+JKPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+JKPicker.m"; sourceTree = "<group>"; };
 		B0B3EAF91A6E256C00E9109C /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		B0B3EAFB1A6E341700E9109C /* SShelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SShelp.h; sourceTree = "<group>"; };
+		B0B3EAFC1A6E341700E9109C /* SShelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SShelp.m; sourceTree = "<group>"; };
 		B0CBD7841A6AA95C00C5CE32 /* SSInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSInfoModel.h; sourceTree = "<group>"; };
 		B0CBD7851A6AA95C00C5CE32 /* SSInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSInfoModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -246,6 +249,8 @@
 		B0993A8F1A69559D009B9E12 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				B0B3EAFB1A6E341700E9109C /* SShelp.h */,
+				B0B3EAFC1A6E341700E9109C /* SShelp.m */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -487,6 +492,7 @@
 				B0A3724F1A6CD57000178B2E /* FirstViewController.m in Sources */,
 				B0B3EAEF1A6E16A300E9109C /* JKAssetsGroupsView.m in Sources */,
 				B0993A611A694D00009B9E12 /* AppDelegate.m in Sources */,
+				B0B3EAFD1A6E341700E9109C /* SShelp.m in Sources */,
 				B0B3EAF41A6E16A300E9109C /* JKPhotoBrowserCell.m in Sources */,
 				B0B3EAF81A6E16A300E9109C /* UIView+JKPicker.m in Sources */,
 				B0B3EAEE1A6E16A300E9109C /* JKAssetsGroupCell.m in Sources */,

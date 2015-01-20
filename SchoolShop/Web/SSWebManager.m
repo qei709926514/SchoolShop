@@ -9,9 +9,6 @@
 #import "SSWebManager.h"
 #import <BmobSDK/Bmob.h>
 #import "SSInfoModel.h"
-#import "JKAssets.h"
-#import <AssetsLibrary/ALAssetRepresentation.h>
-#define KOriginalPhotoImagePath [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"OriginalPhotoImages"]
 
 static SSWebManager *WebManger;
 
@@ -26,39 +23,55 @@ static SSWebManager *WebManger;
     return WebManger;
 }
 
-- (void)accessGetDicObject:(BmobObject *)object
+- (void)accessGetList:(NSInteger)page
+{
+    BmobQuery *que = [BmobQuery queryWithClassName:@"mainInfo"];
+    que.limit = 10;
+    que.skip = page*10-10;
+    [que includeKey:@"image,FBZ"];
+
+    [que findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
+        NSMutableArray *arrData = [NSMutableArray array];
+        for (BmobObject *obj in array) {
+            [arrData addObject:[self accessGetDicObject:obj]];
+            if (arrData.count == array.count ) {
+               [[NSNotificationCenter defaultCenter] postNotificationName:@"List" object:arrData];
+            }
+        }
+    }];
+
+}
+
+
+- (SSInfoModel *)accessGetDicObject:(BmobObject *)object
 {
     NSMutableDictionary * dic = [NSMutableDictionary dictionary];
     
     [dic setObject:object.objectId forKey:@"objectid"];
     [dic setObject:[object objectForKey:@"tiltle"] forKey:@"tiltle"];
     [dic setObject:[object objectForKey:@"info"] forKey:@"info"];
-    BmobFile *flie = [object objectForKey:@"mainImage"];
-    [dic setObject:flie.url forKey:@"mainimage"];
     [dic setObject:[object objectForKey:@"attention"] forKey:@"attention"];
     [dic setObject:[object objectForKey:@"price"] forKey:@"price"];
     [dic setObject:[object objectForKey:@"isCP"] forKey:@"isCP"];
     [dic setObject:[object objectForKey:@"isW"] forKey:@"isW"];
     [dic setObject:[object objectForKey:@"class"] forKey:@"Kclass"];
     [dic setObject:object.createdAt forKey:@"createdAt"];
-    BmobQuery *bquery = [BmobQuery queryWithClassName:@"image"];
-    [bquery whereKey:@"in" equalTo:object];
-    [bquery findObjectsInBackgroundWithBlock:^(NSArray *array, NSError *error) {
-        
-       NSMutableArray *imageArr = [NSMutableArray array];
-        BmobObject *image = [array firstObject];
-            for (NSInteger k = 1; k<6; k++) {
-                NSString *key = [NSString stringWithFormat:@"image%ld",(long)k];
-                BmobFile *ima = [image objectForKey:key];
-                [imageArr addObject:ima.url];
-            }
-        
-       [dic setObject:imageArr forKey:@"image"];
-      
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"dic" object:dic];
-   
-    }];
-}
+    BmobObject *FBZ = [object objectForKey:@"FBZ"];
+    [dic setObject:FBZ.objectId forKey:@"FBZid"];
+
+    BmobObject *imageO = [object objectForKey:@"image"];
+    NSMutableArray *imageArr = [NSMutableArray array];
+    for (NSInteger k = 1; k < 6; k++) {
+        NSString *key = [NSString stringWithFormat:@"image%ld", (long)k];
+        BmobFile *ima = [imageO objectForKey:key];
+        if (ima) {
+            [imageArr addObject:ima.url];
+        }
+    }
+    [dic setObject:imageArr forKey:@"image"];
+    SSInfoModel *model = [SSInfoModel infoWithkDate:dic];
+    return model;
+ }
 
 - (void)accessSaveinfo:(SSInfoModel *)model
 {
@@ -70,51 +83,31 @@ static SSWebManager *WebManger;
     [info setObject:model.isCP forKey:@"isCP"];
     [info setObject:model.isW forKey:@"isW"];
     [info setObject:model.Kclass forKey:@"class"];
-    
-    BmobFile *mainImage = [[BmobFile alloc]initWithClassName:@"mainInfo" withFilePath:model.mainimage];
-    if ([mainImage save]) {
-        [info setObject:mainImage forKey:@"mainimage"];
-    }
+    [info saveInBackgroundWithResultBlock:^(BOOL isSuccessful, NSError *error) {
+        if (isSuccessful) {
+            NSLog(@"%@",info.objectId);
+            [self accessUploadImage:model.image withIn:info];
+        }
+        
+
+    }];
+        
 }
 
-- (void)accessUploadImage:(NSArray *)arr
-{
-    
-    
-//    [arr enumerateObjectsUsingBlock:^(JKAssets* obj, NSUInteger idx, BOOL *stop) {
-    JKAssets* obj = [arr firstObject];
-        ALAssetsLibrary *ass = [[ALAssetsLibrary alloc]init];
-        
-        NSFileManager * fileManager = [NSFileManager defaultManager];
-        if (![fileManager fileExistsAtPath:KOriginalPhotoImagePath]) {
-            [fileManager createDirectoryAtPath:KOriginalPhotoImagePath withIntermediateDirectories:YES attributes:nil error:nil];
-        }
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            if (obj.groupPropertyURL) {
-                [ass assetForURL:obj.assetPropertyURL resultBlock:^(ALAsset *asset) {
-                    
-                    ALAssetRepresentation *rep = [asset defaultRepresentation];
-                    Byte *buffer = (Byte*)malloc((unsigned long)rep.size);
-                    NSUInteger buffered = [rep getBytes:buffer fromOffset:0.0 length:((unsigned long)rep.size) error:nil];
-                    NSData *data = [NSData dataWithBytesNoCopy:buffer length:buffered freeWhenDone:YES];
-                    NSString * imagePath = [KOriginalPhotoImagePath stringByAppendingPathComponent:@"image1"];
-                    [data writeToFile:imagePath atomically:YES];
-                    NSLog(@"%@",imagePath);
-                    BmobFile *bmobfile = [[BmobFile alloc]initWithClassName:@"image" withFilePath:imagePath];
-                    [bmobfile saveInBackground:^(BOOL isSuccessful, NSError *error) {
-                        if (isSuccessful) {
-                            BmobObject *obj = [[BmobObject alloc] initWithClassName:@"image"];
-                            [obj setObject:bmobfile forKey:@"image1"];
-                            [obj saveInBackground];
-                        }
-                    }];
 
-                } failureBlock:nil];
-            }
+
+- (void)accessUploadImage:(NSArray *)arr withIn:(BmobObject *)object
+{
+    [BmobFile filesUploadBatchWithPaths:arr progressBlock:^(int index, float progress) {
         
-            });
-  
-    
+    } resultBlock:^(NSArray *array, BOOL isSuccessful, NSError *error) {
+        BmobObject *obj = [[BmobObject alloc]initWithClassName:@"image"];
+        [array enumerateObjectsUsingBlock:^(BmobFile *file, NSUInteger idx, BOOL *stop) {
+            [obj setObject:file forKey:[NSString stringWithFormat:@"image%lu",idx+1]];
+        }];
+        [obj setObject:object forKey:@"in"];
+        [obj saveInBackground];
+    }];
 }
 
 

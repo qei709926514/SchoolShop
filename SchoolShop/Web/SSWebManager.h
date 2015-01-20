@@ -8,13 +8,18 @@
 
 #import <Foundation/Foundation.h>
 @class BmobObject;
+@class SSInfoModel;
 
 @interface SSWebManager : NSObject
 
 + (SSWebManager *)shareHttpManage;
 
-- (void)accessGetDicObject:(BmobObject *)object;
+- (SSInfoModel *)accessGetDicObject:(BmobObject *)object;
 
-- (void)accessUploadImage:(NSArray *)arr;
+- (void)accessGetList:(NSInteger)page;
+
+- (void)accessSaveinfo:(SSInfoModel *)model;
+
+- (void)accessUploadImage:(NSArray *)arr withIn:(BmobObject *)object;
 
 @end
