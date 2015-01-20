@@ -9,6 +9,7 @@
 #import "SSWebManager.h"
 #import <BmobSDK/Bmob.h>
 #import "SSInfoModel.h"
+#import "SSusrModel.h"
 
 static SSWebManager *WebManger;
 
@@ -22,6 +23,34 @@ static SSWebManager *WebManger;
     });
     return WebManger;
 }
+
+
+- (void)Login:(NSString *)username password:(NSString *)password
+{
+    [BmobUser loginWithUsernameInBackground:username password:password block:^(BmobUser *user, NSError *error) {
+        SSusrModel *model = [self accessGetUserInfo:user];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"Login" object:model];
+    }];
+}
+
+
+- (SSusrModel *)accessGetUserInfo:(BmobUser *)user
+{
+    NSMutableDictionary *userDic = [NSMutableDictionary dictionary];
+    [userDic setObject:user.objectId forKey:@"objectid"];
+    [userDic setObject:[user objectForKey:@"name"] forKey:@"name"];
+    [userDic setObject:[user objectForKey:@"writed"] forKey:@"writed"];
+    [userDic setObject:[user objectForKey:@"email"] forKey:@"email"];
+    [userDic setObject:[user objectForKey:@"emailVerified"] forKey:@"emailVerified"];
+    BmobFile *icon = [user objectForKey:@"icon"];
+    [userDic setObject:icon.url forKey:@"icon"];
+    BmobFile *setting = [user objectForKey:@"setting"];
+    [userDic setObject:setting.url forKey:@"setting"];
+    SSusrModel *model = [SSusrModel userWithkDate:userDic];
+    return model;
+}
+
+
 
 - (void)accessGetList:(NSInteger)page
 {

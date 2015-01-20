@@ -77,8 +77,7 @@
 {
     NSArray *dataArr = noti.object;
     
-//     NSLog(@"%@",model);
-//    self.upmodel = model;
+
 
    
 }

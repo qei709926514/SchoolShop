@@ -9,10 +9,15 @@
 #import <Foundation/Foundation.h>
 @class BmobObject;
 @class SSInfoModel;
+@class BmobUser;
+@class SSusrModel;
 
 @interface SSWebManager : NSObject
 
 + (SSWebManager *)shareHttpManage;
+
+
+- (SSusrModel *)accessGetUserInfo:(BmobUser *)user;
 
 - (SSInfoModel *)accessGetDicObject:(BmobObject *)object;
 
